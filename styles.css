@@ -6,12 +6,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: rgb(2, 48, 71);
 }
 
 .container {
     display: flex;
-    background: white;
+    flex-direction: row; 
+    background: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 900px;
@@ -20,18 +21,49 @@ body {
 }
 
 .calculator {
+    box-sizing: border-box;
+    min-width: 50%;
+    min-height: 100%;
+    flex-direction: column;
     flex: 1;
     padding-right: 20px;
 }
 
+#savings-form { 
+    flex-direction: column;
+}
+
 .results {
+    box-sizing: border-box;
+    min-width: 50%;
+    min-height: 100%;
     flex: 1;
     padding-left: 20px;
     border-left: 1px solid #ddd;
 }
 
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;  
+    }
+
+    .calculator,
+    .results {
+        justify-content: space-around;
+        min-width: 100%;
+        min-height: 50%;
+        padding-right: 0;
+        padding-left: 0;
+        margin-bottom: 10px;
+        border-left: none; 
+    }
+}
+
 h1 {
+    font-family: 'IBM Plex Sans Condensed';
     font-size: 24px;
+    font-weight: 400;
     margin-bottom: 20px;
 }
 
@@ -48,6 +80,12 @@ form input {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+input::placeholder {
+    color: rgba(255, 0, 0, 0.7); 
+    font-style: italic; 
+}
+
 
 button {
     background-color: #007bff;

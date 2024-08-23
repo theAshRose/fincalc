@@ -6,6 +6,32 @@ function calculateSavings() {
     const annualInterestRate = parseFloat(document.getElementById('annual-interest-rate').value);
     const years = parseFloat(document.getElementById('years').value);
 
+        // Validate inputs
+        let valid = true;
+
+        if (isNaN(initialDeposit)) {
+            validateInput('initial-deposit', 'Enter a number');
+            valid = false;
+        }
+    
+        if (isNaN(monthlyContribution)) {
+            validateInput('monthly-contribution', 'Enter a number');
+            valid = false;
+        }
+    
+        if (isNaN(annualInterestRate)) {
+            validateInput('annual-interest-rate', 'Enter a number');
+            valid = false;
+        }
+    
+        if (isNaN(years)) {
+            validateInput('years', 'Enter a number');
+            valid = false;
+        }
+    
+        // If any input is invalid, stop the function
+        if (!valid) return;
+
     let totalAmount = initialDeposit;
     const monthlyInterestRate = annualInterestRate / 12 / 100;
     const monthlyData = [];
@@ -60,4 +86,11 @@ function calculateSavings() {
             }
         }
     });
+}
+
+function validateInput(inputId, message) {
+    const input = document.getElementById(inputId);
+    input.value = ''; // Clear the current value
+    input.placeholder = message; // Set the red placeholder text
+    input.style.borderColor = 'red'; // Optionally, change the border color to red
 }
