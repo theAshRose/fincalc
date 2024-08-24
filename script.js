@@ -1,4 +1,4 @@
-/*! jQuery Migrate v3.4.1 | (c) OpenJS Foundation and other contributors | jquery.org/license */
+let chart;
 
 function calculateSavings() {
     const initialDeposit = parseFloat(document.getElementById('initial-deposit').value);
@@ -29,7 +29,7 @@ function calculateSavings() {
             valid = false;
         }
     
-        // If any input is invalid, stop the function
+
         if (!valid) return;
 
     let totalAmount = initialDeposit;
@@ -44,7 +44,6 @@ function calculateSavings() {
 
     document.getElementById('total-savings').textContent = `Total Savings: $${totalAmount.toFixed(2)}`;
 
-    // Display the breakdown
     const breakdownList = document.getElementById('breakdown');
     breakdownList.innerHTML = `
         <li>Initial Deposit: $${initialDeposit.toFixed(2)}</li>
@@ -52,9 +51,13 @@ function calculateSavings() {
         <li>Total Interest Earned: $${(totalAmount - initialDeposit - monthlyContribution * years * 12).toFixed(2)}</li>
     `;
 
+    if (chart) {
+        chart.destroy();
+    }
+
     // Display the chart
     const ctx = document.getElementById('savingsChart').getContext('2d');
-    new Chart(ctx, {
+    chart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: Array.from({ length: years * 12 }, (_, i) => `Month ${i + 1}`),
@@ -90,7 +93,7 @@ function calculateSavings() {
 
 function validateInput(inputId, message) {
     const input = document.getElementById(inputId);
-    input.value = ''; // Clear the current value
-    input.placeholder = message; // Set the red placeholder text
-    input.style.borderColor = 'red'; // Optionally, change the border color to red
+    input.value = ''; 
+    input.placeholder = message; 
+    input.style.borderColor = 'red'; 
 }
